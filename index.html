@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Images in HTML</title>
+	<!-- 	<reference path="OrgChart.d.ts" /> -->
+	<script src="./js/orgchart.js"></script>
+</head>
+
+<body>
+	<!-- 	<script src="https://balkan.app/js/orgchart.js"></script> -->
+	<div style="width:100%; height: 1000px;" id="tree">
+		<script>
+			
+OrgChart.templates.myTemplate = Object.assign({}, OrgChart.templates.ana);
+OrgChart.templates.myTemplate.defs = '<filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="cool-shadow"><feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1" /><feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1" /><feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1" /><feMerge><feMergeNode in="shadowMatrixOuter1" /><feMergeNode in="SourceGraphic" /></feMerge></filter>';
+
+OrgChart.templates.myTemplate.size = [310, 190];
+OrgChart.templates.myTemplate.node = '<rect filter="url(#cool-shadow)"  x="0" y="0" height="190" width="310" fill="#ffffff" stroke-width="1" stroke="#eeeeee" rx="10" ry="10"></rect><rect fill="#ffffff" x="100" y="10" width="200" height="100" rx="10" ry="10" filter="url(#cool-shadow)"></rect><rect stroke="#eeeeee" stroke-width="1" x="10" y="120" width="220" fill="#ffffff" rx="10" ry="10" height="60"></rect><rect stroke="#eeeeee" stroke-width="1" x="240" y="120" width="60" fill="#ffffff" rx="10" ry="10" height="60"></rect><text  style="font-size: 18px;" fill="#afafaf" x="110" y="60">KPI</text>'
+    + '<image  xlink:href="https://cdn.balkan.app/shared/speedometer.svg" x="110" y="65" width="32" height="32"></image>';
+
+OrgChart.templates.myTemplate.img = '<clipPath id="{randId}"><rect  fill="#ffffff" stroke="#039BE5" stroke-width="5" x="10" y="10" rx="10" ry="10" width="80" height="100"></rect></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="10" y="10"  width="80" height="100"></image><rect fill="none" stroke="#F57C00" stroke-width="2" x="10" y="10" rx="10" ry="10" width="80" height="100"></rect>';
+
+OrgChart.templates.myTemplate.name = '<text  style="font-size: 18px;" fill="#afafaf" x="110" y="30">{val}</text>';
+OrgChart.templates.myTemplate.title = '<text  style="font-size: 14px;" fill="#F57C00" x="20" y="145">{val}</text>';
+OrgChart.templates.myTemplate.title2 = '<text style="font-size: 14px;" fill="#afafaf" x="20" y="165">{val}</text>';
+OrgChart.templates.myTemplate.points = '<text style="font-size: 24px;" fill="#F57C00" x="270" y="165" text-anchor="middle">{val}</text>';
+OrgChart.templates.myTemplate.performance = '<text style="font-size: 24px;" fill="#F57C00" x="150" y="90" >{val}</text>';
+OrgChart.templates.myTemplate.svg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:#F2F2F2;display:block;" width="{w}" height="{h}" viewBox="{viewBox}">{content}</svg>';
+OrgChart.templates.myTemplate.nodeMenuButton =
+    '<g style="cursor:pointer;" transform="matrix(1,0,0,1,270,20)" data-ctrl-n-menu-id="{id}">'
+    + '<rect x="-4" y="-10" fill="#000000" fill-opacity="0" width="22" height="22"></rect>'
+    + '<circle cx="0" cy="0" r="2" fill="#F57C00"></circle>'
+    + '<circle cx="7" cy="0" r="2" fill="#F57C00"></circle><circle cx="14" cy="0" r="2" fill="#F57C00"></circle>'
+    + '</g>';
+
+/* 			OrgChart.templates.myTemplate = Object.assign({}, OrgChart.templates.olivia);
+			OrgChart.templates.myTemplate.field_0 = '<text data-width="150" data-text-overflow="ellipsis"  style="font-size: 18px;" fill="white" x="160" y="40" text-anchor="middle">{val}</text>';
+			OrgChart.templates.myTemplate.field_1 = '<text data-width="150" data-text-overflow="multiline-2-ellipsis" style="font-size: 16px;" fill="white" x="160" y="75" text-anchor="middle">{val}</text>';
+ *//* 			OrgChart.templates.myTemplate.performance = '<text style="font-size: 24px;" fill="#F57C00" x="150" y="90" >{val}</text>';
+			OrgChart.templates.myTemplate.svg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:#F2F2F2;display:block;" width="{w}" height="{h}" viewBox="{viewBox}">{content}</svg>';
+ */
+			var chart = new OrgChart(document.getElementById("tree"), {
+				template: "myTemplate",
+				/* mode: 'dark', */
+				mouseScrool: OrgChart.none,
+				layout: OrgChart.tree,
+/* 				nodeBinding: {
+					field_0: "Фамилия Имя",
+					field_1: "Должность",
+					img_0: "Фото"
+				},
+				editForm: {
+					photoBinding: 'Фото'
+				},
+				nodeMenu: {
+					details: { text: "Детали" },
+					edit: { text: "Редактировать" },
+					add: { text: "Добавить" },
+					remove: { text: "Удалить" }
+				}
+			 */
+			 nodeBinding: {
+        name: 'Фамилия Имя',
+        title: 'Должность',
+        title2: 'Задачи',
+        points: 'points',
+        performance: 'KPI',
+        img: 'Фото'
+    },
+    nodeMenu: {
+        details: { text: "Детали" },
+        edit: { text: "Редактировать" },
+        add: { text: "Добавить" },
+        remove: { text: "Удалить" }
+    },
+			});
+			/* chart.on('init', function (sender) {
+				sender.editUI.show(1);
+			}); */
+
+			chart.load([
+				{ id: 1, KPI: 99.0, Задачи: "Задач в работе", points: 17,"Фамилия Имя": "Садовский Антон", Должность: "Начальник управления", Фото: "images/Садовский Антон.jpg"/* ,performance: 11 */ },
+				{ id: 2, pid: 1, KPI: 99.5, Задачи: "Задач в работе", points: 12, "Фамилия Имя": "Сухина Татьяна", Должность: "Зам.начальника управления", Фото: "images/Сухина Татьяна Валерьевна.jpg" },
+				{ id: 4, pid: 2, KPI: 80.5,Задачи: "Задач в работе", points: 15,"Фамилия Имя": "Орлов Алексей", Должность: "Начальник отдела", Фото: "images/Орлов Алексей Викторович.jpg" },
+				{ id: 3, pid: 2, KPI: 81.3,Задачи: "Задач в работе", points: 12,"Фамилия Имя": "Шамов Александр", Должность: "Начальник отдела", Фото: "images/Шамов Александр Сергеевич.jpg" },
+				{ id: 5, pid: 2, KPI: 80.0,Задачи: "Задач в работе", points: 8,"Фамилия Имя": "Хрунов Николай", Должность: "Начальник отдела", Фото: "images/Хрунов Николай Михайлович.jpg" },
+				{ id: 6, pid: 2, KPI: 80.5,Задачи: "Задач в работе", points: 21,"Фамилия Имя": "Соколков Роман", Должность: "Начальник отдела", Фото: "images/Соколков Роман Викторович.jpg" },
+				{ id: 7, pid: 3, KPI: 50.6,Задачи: "Задач в работе", points: 7,"Фамилия Имя": "Сураева Екатерина", Должность: "Главный эксперт", Фото: "images/Ионичева Екатерина Викторовна.jpg" },
+				{ id: 8, pid: 3, KPI: 0.0,Задачи: "Задач в работе", points: 0,"Фамилия Имя": "Вакант", Должность: "Главный эксперт" },
+				{ id: 9, pid: 4,KPI: 80.5, Задачи: "Задач в работе", points: 12,"Фамилия Имя": "Первой Роман", Должность: "Зам.начальника отдела", Фото: "images/Первой Роман Александрович.jpg" },
+				{ id: 10, pid: 9,KPI: 80.5, Задачи: "Задач в работе", points: 5,"Фамилия Имя": "Раздобарин Сергей", Должность: "Главный эксперт", Фото: "images/Раздобарин Сергей Евгеньевич.jpg" },
+				{ id: 11, pid: 9,KPI: 80.5, Задачи: "Задач в работе", points: 11,"Фамилия Имя": "Вильганенко Евгений", Должность: "Главный специалист", Фото: "images/Вильганенко Евгений Александрович.jpg" },
+				{ id: 12, pid: 9,KPI: 80.5,Задачи: "Задач в работе", points: 8, "Фамилия Имя": "Раздобарин Сергей", Должность: "Главный эксперт", Фото: "images/Раздобарин Сергей Евгеньевич.jpg" },
+				{ id: 13, pid: 9,KPI: 80.5, Задачи: "Задач в работе", points: 9,"Фамилия Имя": "Хайдуков Герман", Должность: "Главный эксперт", Фото: "images/Хайдуков Герман Игоревич.jpg" },
+				{ id: 14, pid: 9,KPI: 80.5, Задачи: "Задач в работе", points: 17,"Фамилия Имя": "Ярцев Игорь", Должность: "Главный эксперт", Фото: "images/Ярцев Игорь Викторович.jpg" },
+				{ id: 15, pid: 5,KPI: 80.5, Задачи: "Задач в работе", points: 10,"Фамилия Имя": "Елманов Виталий", Должность: "Зам.начальника отдела", Фото: "images/Елманов Виталий Валерьевич.jpg" },
+				{ id: 16, pid: 15,KPI: 76.5, Задачи: "Задач в работе", points: 17,"Фамилия Имя": "Лексикова Светлана", Должность: "Главный эксперт", Фото: "images/Лексикова Светлана Александровна.jpg" },
+				{ id: 17, pid: 15,KPI: 55.5, Задачи: "Задач в работе", points: 15,"Фамилия Имя": "Марютин Евгений", Должность: "Главный эксперт", Фото: "images/Марютин Евгений Васильевич.jpg" },
+				{ id: 18, pid: 15,KPI: 66.4, Задачи: "Задач в работе", points: 12,"Фамилия Имя": "Тихомирова Наталья", Должность: "Главный эксперт", Фото: "images/Тихомирова Наталья Владимировна.jpg" },
+				{ id: 19, pid: 15,KPI: 33.3, Задачи: "Задач в работе", points: 8,"Фамилия Имя": "Рябчук Алексей", Должность: "Главный эксперт", Фото: "images/Рябчук Алексей Павлович.jpg" },
+
+			]);
+		</script>
+	</div>
+</body>
+
+</html>
